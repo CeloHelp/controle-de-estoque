@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const sequelize = require('./models/database');
+const Estoque = require('./models/Estoque');
 const PORT = process.env.PORT || 3000;
 
 const estoqueRoutes = require('./routes/estoque');
@@ -13,6 +15,8 @@ app.get('/', (req, res) => {
 
 app.use('/estoque', estoqueRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+sequelize.sync().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
 });

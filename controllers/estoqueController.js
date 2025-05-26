@@ -1,35 +1,56 @@
 const Estoque = require('../models/Estoque');
 
-exports.listarItens = (req, res) => {
-  res.json(Estoque.getAll());
+exports.listarItens = async (req, res) => {
+  const itens = await Estoque.findAll();
+  res.json(itens);
 };
 
-exports.buscarItemPorId = (req, res) => {
-  const item = Estoque.getById(parseInt(req.params.id));
+exports.buscarItemPorId = async (req, res) => {
+  const item = await Estoque.findByPk(req.params.id);
   if (!item) return res.status(404).json({ mensagem: 'Item não encontrado' });
   res.json(item);
 };
 
-exports.adicionarItem = (req, res) => {
-  const { nome, tipo, quantidade } = req.body;
-  if (!nome || !tipo || quantidade == null) {
+exports.adicionarItem = async (req, res) => {
+  const { nome, marca, tipo, quantidade, descricao, imagem } = req.body;
+  if (!nome || !marca || !tipo || quantidade == null) {
     return res.status(400).json({ mensagem: 'Dados incompletos' });
   }
-  const novoItem = Estoque.add({ nome, tipo, quantidade });
+  // Verifica se já existe um produto igual (nome, marca e tipo)
+  const existente = await Estoque.findOne({ where: { nome, marca, tipo } });
+  if (existente) {
+    return res.status(409).json({ mensagem: 'Produto já cadastrado com mesmo nome, marca e tipo.' });
+  }
+  const novoItem = await Estoque.create({ nome, marca, tipo, quantidade, descricao, imagem });
   res.status(201).json(novoItem);
 };
 
-exports.atualizarItem = (req, res) => {
-  const id = parseInt(req.params.id);
-  const { nome, tipo, quantidade } = req.body;
-  const atualizado = Estoque.update(id, { nome, tipo, quantidade });
-  if (!atualizado) return res.status(404).json({ mensagem: 'Item não encontrado' });
-  res.json(atualizado);
+exports.atualizarItem = async (req, res) => {
+  const { nome, marca, tipo, quantidade, descricao, imagem } = req.body;
+  const item = await Estoque.findByPk(req.params.id);
+  if (!item) return res.status(404).json({ mensagem: 'Item não encontrado' });
+  item.nome = nome ?? item.nome;
+  item.marca = marca ?? item.marca;
+  item.tipo = tipo ?? item.tipo;
+  item.quantidade = quantidade ?? item.quantidade;
+  item.descricao = descricao ?? item.descricao;
+  item.imagem = imagem ?? item.imagem;
+  await item.save();
+  // Retorna todos os campos atualizados
+  res.json({
+    id: item.id,
+    nome: item.nome,
+    marca: item.marca,
+    tipo: item.tipo,
+    quantidade: item.quantidade,
+    descricao: item.descricao,
+    imagem: item.imagem
+  });
 };
 
-exports.removerItem = (req, res) => {
-  const id = parseInt(req.params.id);
-  const removido = Estoque.remove(id);
-  if (!removido) return res.status(404).json({ mensagem: 'Item não encontrado' });
+exports.removerItem = async (req, res) => {
+  const item = await Estoque.findByPk(req.params.id);
+  if (!item) return res.status(404).json({ mensagem: 'Item não encontrado' });
+  await item.destroy();
   res.json({ mensagem: 'Item removido com sucesso' });
 };

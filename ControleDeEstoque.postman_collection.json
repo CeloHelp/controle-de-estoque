@@ -1,0 +1,88 @@
+{
+  "info": {
+    "_postman_id": "c1e1e1e1-1234-5678-9abc-def012345678",
+    "name": "Controle de Estoque - Amortecedores",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Adicionar Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Amortecedor Dianteiro\",\n  \"marca\": \"Monroe\",\n  \"tipo\": \"Carro\",\n  \"quantidade\": 10,\n  \"descricao\": \"Amortecedor dianteiro para carros de passeio.\",\n  \"imagem\": \"https://exemplo.com/imagem-amortecedor.jpg\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/estoque",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["estoque"]
+        }
+      }
+    },
+    {
+      "name": "Listar Itens",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/estoque",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["estoque"]
+        }
+      }
+    },
+    {
+      "name": "Buscar Item por ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/estoque/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["estoque", "1"]
+        }
+      }
+    },
+    {
+      "name": "Atualizar Item",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Amortecedor Traseiro\",\n  \"marca\": \"Cofap\",\n  \"tipo\": \"Caminhonete\",\n  \"quantidade\": 5,\n  \"descricao\": \"Amortecedor traseiro reforçado para caminhonetes.\",\n  \"imagem\": \"https://exemplo.com/imagem-amortecedor-traseiro.jpg\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/estoque/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["estoque", "1"]
+        }
+      }
+    },
+    {
+      "name": "Remover Item",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:3000/estoque/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["estoque", "1"]
+        }
+      }
+    }
+  ]
+}

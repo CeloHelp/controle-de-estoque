@@ -95,6 +95,7 @@
   <li>Este projeto foi desenvolvido como atividade prática da disciplina de Desenvolvimento Web.</li>
   <li>O banco de dados utilizado é o SQLite, armazenado localmente como um arquivo.</li>
   <li>A estrutura segue o padrão REST e permite fácil expansão para outros módulos.</li>
+  <li>e-mail para contato: marcelo.pacobello@sou.unifeob.edu.br</li>
 </ul>
 
 

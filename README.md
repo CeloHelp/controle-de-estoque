@@ -1,7 +1,8 @@
 <h1 align="center" style="font-weight: bold;">🔧 Backend - Controle de Estoque de Amortecedores</h1>
 
 <p align="center">
-  <em>API REST desenvolvida com Node.js e Express, utilizando banco de dados SQLite para o gerenciamento de estoque de produtos.</em>
+  <em>API REST desenvolvida com Node.js e Express, utilizando banco de dados SQLite para o gerenciamento de estoque de produtos.</em><br/>
+  <em>Este projeto foi desenvolvido como parte das atividades práticas da faculdade (disciplina de Desenvolvimento Web).</em>
 </p>
 
 <p align="center">
@@ -92,10 +93,8 @@
 
 <h2>📎 Observações</h2>
 <ul>
-  <li>Este projeto foi desenvolvido como atividade prática da disciplina de Desenvolvimento Web.</li>
+  <li>Projeto desenvolvido como parte da disciplina de <strong>Desenvolvimento Web</strong> da UNIFEOB.</li>
   <li>O banco de dados utilizado é o SQLite, armazenado localmente como um arquivo.</li>
   <li>A estrutura segue o padrão REST e permite fácil expansão para outros módulos.</li>
-  <li>e-mail para contato: marcelo.pacobello@sou.unifeob.edu.br</li>
+  <li>Contato: marcelo.pacobello@sou.unifeob.edu.br</li>
 </ul>
-
-
